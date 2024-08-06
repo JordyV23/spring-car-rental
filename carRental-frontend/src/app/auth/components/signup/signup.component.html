@@ -1,1 +1,111 @@
-<p>signup works!</p>
+<div class="bg">
+  <nz-spin [nzSize]="'large'" [nzSpinning]="isSpinning" nzTip="Working...">
+    <div class="parent">
+      <div class="child">
+
+        <div nz-row class="imgDiv">
+          <div nz-col nzSpan="24">
+            <h1>Sign Up</h1>
+          </div>
+        </div>
+
+        <form nz-form [formGroup]="signupForm">
+
+          <!-- Input Email -->
+          <nz-form-item>
+            <nz-form-control nzHasFeedback nzErrorTip="The input is not valid E-mail">
+              <!-- Input Group -->
+              <nz-input-group [nzPrefix]="prefixTemplateMail">
+                <!-- Input -->
+                <input nz-input placeholder="E-mail" id="email" formControlName="email">
+              </nz-input-group>
+              <!-- Mail Icon -->
+              <ng-template #prefixTemplateMail>
+                <span nz-icon nzType="mail"></span>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+
+          <!-- Input passord -->
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorPass">
+              <nz-input-group [nzPrefix]="prefixTemplatePassword">
+                <input nz-input placeholder="Password" type="password" id="password" formControlName="password">
+              </nz-input-group>
+
+              <ng-template #prefixTemplatePassword>
+                <span nz-icon nzType="lock" nzTheme="outline"></span>
+              </ng-template>
+
+              <!-- Error Messages -->
+              <ng-template #errorPass let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                  Password is required!
+                </ng-container>
+
+                <ng-container *ngIf="control.hasError('pattern')">
+                  Password should Contains 8 characters, 1 lowercase, 1 Uppercase, 1 Number and 1 special character
+                </ng-container>
+              </ng-template>
+
+            </nz-form-control>
+          </nz-form-item>
+
+          <!-- Input Confirm Password -->
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
+              <nz-input-group [nzPrefix]="prefixTemplateCheckPassword">
+                <input nz-input placeholder="Confirm Password" type="password" id="checkPassword"
+                  formControlName="checkPassword">
+              </nz-input-group>
+
+              <ng-template #prefixTemplateCheckPassword>
+                <span nz-icon nzType="lock" nzTheme="outline"></span>
+              </ng-template>
+
+              <!-- Error Messages -->
+              <ng-template #errorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                  Please, Confirm your password!
+                </ng-container>
+
+                <ng-container *ngIf="control.hasError('confirm')">
+                  Two passwords that you enter is inconsistent!
+                </ng-container>
+              </ng-template>
+
+            </nz-form-control>
+          </nz-form-item>
+
+          <!-- Input username -->
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzErrorTip]="userErrorTpl">
+              <nz-input-group [nzPrefix]="prefixTemplateUser">
+                <!-- Input -->
+                <input nz-input placeholder="Name" id="username" formControlName="name" />
+              </nz-input-group>
+              <!-- Icon -->
+              <ng-template #prefixTemplateUser>
+                <span nz-icon nzType="user" nzTheme="outline"></span>
+              </ng-template>
+
+              <!-- Error Messages -->
+              <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.harError('required')">
+                  Please input your username!
+                </ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+
+          <!-- Login btn -->
+          <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" (click)="register()">
+            Register </button>
+          Or <a routerLink="/login"> Login Now! </a>
+
+        </form>
+
+      </div>
+    </div>
+  </nz-spin>
+</div>
